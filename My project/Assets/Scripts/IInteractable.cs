@@ -2,5 +2,12 @@ using UnityEngine;
 
 public interface IInteractable 
 {
-    public void Drag(Vector2 position) { }
+    void YouHaveBeenSelected();
+
+    void YouHaveBeenUnselected();
+
+    void Move(Vector2 position) { }
+    void Rotate() { }
+
+    void Scale() { }
 }

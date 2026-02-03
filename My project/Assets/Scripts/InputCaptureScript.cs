@@ -1,13 +1,14 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class InputCaptureScript : MonoBehaviour
 {
     private float timer;
     private bool hasMoved;
     private float tapTreshold = 0.5f;
-ManagerActionsScript theManager;
+    ManagerActionsScript theManager;
 
     void Start()
     {
@@ -25,27 +26,27 @@ ManagerActionsScript theManager;
                     timer = 0f;
                     hasMoved = false;
                     break;
+
                 case TouchPhase.Stationary:
                     timer += Time.deltaTime;
-
                     break;
+
                 case TouchPhase.Moved:
                     hasMoved = true;
                     timer += Time.deltaTime;
-                   
+                    Ray ray = Camera.main.ScreenPointToRay(t.position);
+                    theManager.DragAt(ray);
                     break;
+
                 case TouchPhase.Ended:
                     if ((timer < tapTreshold) && !hasMoved)
                     {
                         theManager.TapAt(t.position);
                     }
-                    else
-                    {
-
-                    }
                     
                     break;
             }
+            Debug.Log(Input.touchCount);
         }
     }
 }

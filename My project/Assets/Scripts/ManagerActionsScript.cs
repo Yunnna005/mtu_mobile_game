@@ -4,28 +4,54 @@ using UnityEngine;
 
 public class ManagerActionsScript : MonoBehaviour
 {
-
+    IInteractable selectedObject;
+    GameObject objectSelected;
+    RaycastHit hit;
+    private void Update()
+    {
+        
+    }
     internal void TapAt(Vector2 position)
     {
         Ray raycast = Camera.main.ScreenPointToRay(position);
         Debug.DrawLine(raycast.origin, raycast.origin + 100 * raycast.direction, Color.red, 2f);
-        RaycastHit hit;
 
         if (Physics.Raycast(raycast, out hit))
         {
-            string objectName = hit.collider.gameObject.name;
-            Vector3 hitPoint = hit.collider.gameObject.transform.position;
-            Debug.Log("Tapped on object: " + objectName);
-            Debug.Log("Hit texture coordinates: " + hitPoint.ToString());
+            IInteractable newObject = hit.collider.gameObject.GetComponent<IInteractable>();
+            objectSelected = hit.collider.gameObject;
+            if (newObject != null)
+            {
+                if (selectedObject != null) {
+                    selectedObject.YouHaveBeenUnselected();
+                }
+
+                selectedObject = newObject;
+                selectedObject.YouHaveBeenSelected();
+                
+            }
         }
         else
         {
+            if (selectedObject != null)
+            {
+                selectedObject.YouHaveBeenUnselected();
+            }
             Debug.Log("No Object hit");
         }
     }
 
-    internal void Move()
+    internal void DragAt(Ray ray)
     {
-        //move an object
+        if (selectedObject != null) 
+        {
+            if(Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.GetComponent<IInteractable>() == selectedObject)
+                {
+                    selectedObject.Move(hit.point);
+                }
+            }
+        }
     }
 }

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class CubeManager : MonoBehaviour, IInteractable
 {
+    float start_scale = 2f;
+
     Renderer renderer;
     Color defaultColor = Color.blue;
 
@@ -24,5 +26,16 @@ public class CubeManager : MonoBehaviour, IInteractable
     public void Move(Vector2 newPosition)
     {
         transform.position = newPosition;
+        //add to plane
+    }
+
+    public void Rotate()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Scale(Vector2 new_scale)
+    {
+        transform.localScale = new_scale * start_scale;
     }
 }

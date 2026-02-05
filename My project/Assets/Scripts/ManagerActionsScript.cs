@@ -5,11 +5,12 @@ using UnityEngine;
 public class ManagerActionsScript : MonoBehaviour
 {
     IInteractable selectedObject;
-    GameObject objectSelected;
     RaycastHit hit;
-    private void Update()
+    CameraManager camera;
+
+    private void Start()
     {
-        
+        camera = FindAnyObjectByType<CameraManager>();
     }
     internal void TapAt(Vector2 position)
     {
@@ -19,7 +20,6 @@ public class ManagerActionsScript : MonoBehaviour
         if (Physics.Raycast(raycast, out hit))
         {
             IInteractable newObject = hit.collider.gameObject.GetComponent<IInteractable>();
-            objectSelected = hit.collider.gameObject;
             if (newObject != null)
             {
                 if (selectedObject != null) {
@@ -28,7 +28,6 @@ public class ManagerActionsScript : MonoBehaviour
 
                 selectedObject = newObject;
                 selectedObject.YouHaveBeenSelected();
-                
             }
         }
         else
@@ -53,5 +52,23 @@ public class ManagerActionsScript : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            //camera.Move();
+        }
+    }
+
+    internal void Pinch(Vector2 touch1, Vector2 touch2)
+    {
+        if (selectedObject != null)
+        {
+            Vector2 new_Scale = touch1/touch2;
+            selectedObject.Scale(new_Scale);
+        }
+        else
+        {
+            Vector2 trs = touch2 - touch1;
+            camera.Zoom(trs);
+        }    
     }
 }

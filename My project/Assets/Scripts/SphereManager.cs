@@ -1,7 +1,10 @@
+using System.Transactions;
 using UnityEngine;
 
 public class SphereManager : MonoBehaviour, IInteractable
 {
+    float start_scale = 2f;
+
     Renderer renderer;
     Color defaultColor = Color.green;
 
@@ -24,5 +27,15 @@ public class SphereManager : MonoBehaviour, IInteractable
     public void Move(Vector2 newPosition)
     {
         transform.position = newPosition;
+    }
+
+    public void Rotate()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Scale(Vector2 new_scale)
+    {
+        transform.localScale = new_scale * start_scale;
     }
 }

@@ -58,16 +58,22 @@ public class ManagerActionsScript : MonoBehaviour
         }
     }
 
-    internal void Pinch(Vector2 touch1, Vector2 touch2)
+    internal void Pinch(Touch touch1, Touch touch2)
     {
+        Vector2 t1Prev = touch1.position - touch1.deltaPosition;
+        Vector2 t2Prev = touch2.position - touch2.deltaPosition;
+
+        float prevDistance = Vector2.Distance(t1Prev, t2Prev);
+        float currentDistance = Vector2.Distance(touch1.position, touch2.position);
+
+        float trs = currentDistance - prevDistance;
+
         if (selectedObject != null)
         {
-            Vector2 new_Scale = touch1/touch2;
-            selectedObject.Scale(new_Scale);
+            selectedObject.Scale(Vector3.one * trs * 0.01f);
         }
         else
         {
-            Vector2 trs = touch2 - touch1;
             camera.Zoom(trs);
         }    
     }

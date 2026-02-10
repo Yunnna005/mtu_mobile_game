@@ -8,7 +8,6 @@ public class InputCaptureScript : MonoBehaviour
     private float timer;
     private bool hasMoved;
     private float tapTreshold = 0.5f;
-    Vector2 t1, t2;
 
     ManagerActionsScript theManager;
 
@@ -28,7 +27,6 @@ public class InputCaptureScript : MonoBehaviour
                     timer = 0f;
                     hasMoved = false;
 
-                    t1 = t.position;
                     break;
 
                 case TouchPhase.Stationary:
@@ -41,11 +39,6 @@ public class InputCaptureScript : MonoBehaviour
                     Ray ray = Camera.main.ScreenPointToRay(t.position);
                     theManager.DragAt(ray);
 
-                    while(t.tapCount == 2)
-                    {
-                        t2 = t.position;
-                        theManager.Pinch(t1, t2);
-                    }
                     break;
 
                 case TouchPhase.Ended:
@@ -57,6 +50,16 @@ public class InputCaptureScript : MonoBehaviour
                     break;
             }
             Debug.Log(Input.touchCount);
+        }
+        
+        if (Input.touchCount >= 2)
+        {
+
+            print("In inputCapture");
+            Touch t1 = Input.GetTouch(0);
+            Touch t2 = Input.GetTouch(1);
+
+            theManager.Pinch(t1, t2);
         }
     }
 }

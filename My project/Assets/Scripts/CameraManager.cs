@@ -17,9 +17,9 @@ public class CameraManager : MonoBehaviour
         transform.position = newPosition;
     }
 
-    public void Zoom(Vector2 new_scale)
+    public void Zoom(float new_scale)
     {
-        Vector2 trs = new_scale / diagonal;
-        transform.position = position_start + trs * transform.position;
+        Camera.main.fieldOfView -= new_scale * 0.1f;
+        Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, 20f, 80f);
     }
 }

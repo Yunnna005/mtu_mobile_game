@@ -6,5 +6,5 @@ public interface IInteractable
     void YouHaveBeenUnselected();
     void Move(Vector2 position);
     void Rotate();
-    void Scale(Vector2 new_scale);
+    void Scale(float delta);
 }

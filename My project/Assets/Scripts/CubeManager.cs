@@ -29,13 +29,17 @@ public class CubeManager : MonoBehaviour, IInteractable
         //add to plane
     }
 
+    public void Scale(float new_scale)
+    {
+        float scaleSpeed = 0.005f;
+        float newScale = transform.localScale.x + new_scale * scaleSpeed;
+        newScale = Mathf.Clamp(newScale, 0.3f, 5f);
+
+        transform.localScale = Vector3.one * newScale;
+    }
+
     public void Rotate()
     {
         throw new System.NotImplementedException();
-    }
-
-    public void Scale(Vector2 new_scale)
-    {
-        transform.localScale = new_scale * start_scale;
     }
 }

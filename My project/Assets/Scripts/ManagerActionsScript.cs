@@ -24,6 +24,7 @@ public class ManagerActionsScript : MonoBehaviour
             {
                 if (selectedObject != null) {
                     selectedObject.YouHaveBeenUnselected();
+                    selectedObject = null;
                 }
 
                 selectedObject = newObject;
@@ -35,12 +36,13 @@ public class ManagerActionsScript : MonoBehaviour
             if (selectedObject != null)
             {
                 selectedObject.YouHaveBeenUnselected();
+                selectedObject = null;
             }
             Debug.Log("No Object hit");
         }
     }
 
-    internal void DragAt(Ray ray)
+    internal void DragAt(Ray ray, Vector2 delta)
     {
         if (selectedObject != null) 
         {
@@ -54,7 +56,7 @@ public class ManagerActionsScript : MonoBehaviour
         }
         else
         {
-            //camera.Move();
+            camera.Move(delta);
         }
     }
 
@@ -70,7 +72,7 @@ public class ManagerActionsScript : MonoBehaviour
 
         if (selectedObject != null)
         {
-            selectedObject.Scale(Vector3.one * trs * 0.01f);
+            selectedObject.Scale(trs);
         }
         else
         {

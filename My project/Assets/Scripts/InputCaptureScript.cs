@@ -37,7 +37,9 @@ public class InputCaptureScript : MonoBehaviour
                     hasMoved = true;
                     timer += Time.deltaTime;
                     Ray ray = Camera.main.ScreenPointToRay(t.position);
-                    theManager.DragAt(ray);
+                    Vector2 delta = t.deltaPosition;
+
+                    theManager.DragAt(ray, delta);
 
                     break;
 
@@ -49,7 +51,6 @@ public class InputCaptureScript : MonoBehaviour
                     
                     break;
             }
-            Debug.Log(Input.touchCount);
         }
         
         if (Input.touchCount >= 2)

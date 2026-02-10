@@ -12,9 +12,9 @@ public class CameraManager : MonoBehaviour
         screen_height = Screen.height;
         diagonal = Mathf.Sqrt(screen_width*screen_width + screen_height*screen_height);
     }
-    public void Move(Vector2 newPosition)
+    public void Move(Vector2 delta)
     {
-        transform.position = newPosition;
+        transform.Translate(-delta.x * Time.deltaTime, -delta.y * Time.deltaTime, 0f,Space.World);
     }
 
     public void Zoom(float new_scale)

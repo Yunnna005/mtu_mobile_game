@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -46,17 +47,11 @@ public class ManagerActionsScript : MonoBehaviour
     {
         if (selectedObject != null) 
         {
-            if(Physics.Raycast(ray, out hit))
-            {
-                if (hit.collider.GetComponent<IInteractable>() == selectedObject)
-                {
-                    selectedObject.Move(hit.point);
-                }
-            }
+            selectedObject.Drag(ray);
         }
         else
         {
-            camera.Move(delta);
+            //camera.Move(delta);
         }
     }
 
@@ -76,7 +71,26 @@ public class ManagerActionsScript : MonoBehaviour
         }
         else
         {
-            camera.Zoom(trs);
+            //camera.Zoom(trs);
         }    
+    }
+
+    internal void GetAngle(Touch touch1, Touch touch2)
+    {
+
+        float y = touch1.position.y - touch2.position.y; 
+        float x = touch1.position.x - touch2.position.x;
+
+        float angle = Mathf.Atan2(y,x) * Mathf.Rad2Deg;
+        print(angle);
+
+        if (selectedObject != null) 
+        {
+            selectedObject.Rotate(angle);
+        }
+        else
+        {
+            camera.Rotate(angle);
+        }
     }
 }

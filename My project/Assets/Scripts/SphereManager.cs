@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class SphereManager : MonoBehaviour, IInteractable
 {
-    float start_scale = 2f;
-
     Renderer renderer;
     Color defaultColor = Color.green;
+    Rigidbody rb;
 
     private void Start()
     {
         renderer = GetComponent<Renderer>();
     }
+
     public void YouHaveBeenSelected()
     {
         Debug.Log("Tapped on object: " + this.name);
@@ -24,16 +24,6 @@ public class SphereManager : MonoBehaviour, IInteractable
         renderer.material.color = defaultColor;
     }
 
-    public void Move(Vector2 newPosition)
-    {
-        transform.position = newPosition;
-    }
-
-    public void Rotate()
-    {
-        throw new System.NotImplementedException();
-    }
-
     public void Scale(float new_scale)
     {
         float scaleSpeed = 0.005f;
@@ -41,5 +31,18 @@ public class SphereManager : MonoBehaviour, IInteractable
         newScale = Mathf.Clamp(newScale, 0.3f, 5f);
 
         transform.localScale = Vector3.one * newScale;
+    }
+    public void Drag(Ray ray)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit)) 
+        { 
+            transform.position = new Vector2(hit.point.x, hit.point.y);
+        }
+    }
+
+    public void Rotate(float angle)
+    {
+        transform.Rotate(0, 0, angle * Time.deltaTime);
     }
 }

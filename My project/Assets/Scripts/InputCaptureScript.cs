@@ -55,12 +55,11 @@ public class InputCaptureScript : MonoBehaviour
         
         if (Input.touchCount >= 2)
         {
-
-            print("In inputCapture");
             Touch t1 = Input.GetTouch(0);
             Touch t2 = Input.GetTouch(1);
 
-            theManager.Pinch(t1, t2);
+            //theManager.Pinch(t1, t2);
+            theManager.GetAngle(t1, t2);
         }
     }
 }

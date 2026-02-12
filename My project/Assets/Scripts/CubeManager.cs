@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class CubeManager : MonoBehaviour, IInteractable
 {
-    float start_scale = 2f;
-
     Renderer renderer;
     Color defaultColor = Color.blue;
 
@@ -23,12 +21,6 @@ public class CubeManager : MonoBehaviour, IInteractable
         renderer.material.color = defaultColor;
     }
 
-    public void Move(Vector2 newPosition)
-    {
-        transform.position = newPosition;
-        //add to plane
-    }
-
     public void Scale(float new_scale)
     {
         float scaleSpeed = 0.005f;
@@ -38,8 +30,17 @@ public class CubeManager : MonoBehaviour, IInteractable
         transform.localScale = Vector3.one * newScale;
     }
 
-    public void Rotate()
+    public void Drag(Ray ray)
     {
-        throw new System.NotImplementedException();
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            transform.position = new Vector2(hit.point.x, hit.point.y);
+        }
+    }
+
+    public void Rotate(float angle)
+    {
+        transform.Rotate(0, 0, angle * Time.deltaTime);
     }
 }

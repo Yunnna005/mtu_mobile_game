@@ -16,7 +16,7 @@ public class CameraManager : MonoBehaviour
     }
     public void Move(Vector2 delta)
     {
-        transform.Translate(-delta.x * Time.deltaTime, -delta.y * Time.deltaTime, 0f,Space.World);
+        transform.Translate(-delta.x * Time.deltaTime, -delta.y * Time.deltaTime, 0f,Space.Self);
     }
 
     public void Zoom(float new_scale)

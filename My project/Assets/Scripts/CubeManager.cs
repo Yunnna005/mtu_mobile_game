@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CubeManager : MonoBehaviour, IInteractable
 {
+    [SerializeField] private LayerMask mask;
     Renderer renderer;
     Color defaultColor = Color.blue;
 
@@ -33,9 +34,10 @@ public class CubeManager : MonoBehaviour, IInteractable
     public void Drag(Ray ray)
     {
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, 100f, mask))
         {
-            transform.position = new Vector2(hit.point.x, hit.point.y);
+            float cubeHalfHeight = transform.localScale.y / 2f;
+            transform.position = new Vector3(hit.point.x, hit.point.y+cubeHalfHeight, hit.point.z);
         }
     }
 

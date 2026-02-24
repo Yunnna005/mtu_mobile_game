@@ -1,3 +1,4 @@
+using System;
 using System.Transactions;
 using UnityEngine;
 
@@ -5,8 +6,8 @@ public class SphereManager : MonoBehaviour, IInteractable
 {
     Renderer renderer;
     Color defaultColor = Color.green;
-    Rigidbody rb;
-
+    bool dragStarted = false;
+    public float dragDistance;
     private void Start()
     {
         renderer = GetComponent<Renderer>();
@@ -34,11 +35,17 @@ public class SphereManager : MonoBehaviour, IInteractable
     }
     public void Drag(Ray ray)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit)) 
-        { 
-            transform.position = new Vector2(hit.point.x, hit.point.y);
+        /*if (!dragStarted)
+        {
+            dragStarted = true;
+            dragDistance = Vector3.Distance(ray.origin, this.transform.position);
         }
+        
+        transform.position = ray.GetPoint(dragDistance);*/
+
+        dragDistance = Vector3.Distance(ray.origin, this.transform.position);
+        transform.position = ray.GetPoint(dragDistance);
+
     }
 
     public void Rotate(float angle)

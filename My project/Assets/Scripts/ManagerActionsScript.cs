@@ -51,7 +51,7 @@ public class ManagerActionsScript : MonoBehaviour
         }
         else
         {
-            //camera.Move(delta);
+            camera.Move(delta);
         }
     }
 
@@ -71,7 +71,7 @@ public class ManagerActionsScript : MonoBehaviour
         }
         else
         {
-            //camera.Zoom(trs);
+            camera.Zoom(trs);
         }    
     }
 
@@ -82,7 +82,6 @@ public class ManagerActionsScript : MonoBehaviour
         float x = touch1.position.x - touch2.position.x;
 
         float angle = Mathf.Atan2(y,x) * Mathf.Rad2Deg;
-        print(angle);
 
         if (selectedObject != null) 
         {

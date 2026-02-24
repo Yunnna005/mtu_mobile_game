@@ -37,7 +37,7 @@ public class InputCaptureScript : MonoBehaviour
                     hasMoved = true;
                     timer += Time.deltaTime;
                     Ray ray = Camera.main.ScreenPointToRay(t.position);
-                    Vector2 delta = t.deltaPosition;
+                    Vector3 delta = t.deltaPosition;
 
                     theManager.DragAt(ray, delta);
 
@@ -58,7 +58,7 @@ public class InputCaptureScript : MonoBehaviour
             Touch t1 = Input.GetTouch(0);
             Touch t2 = Input.GetTouch(1);
 
-            //theManager.Pinch(t1, t2);
+            theManager.Pinch(t1, t2);
             theManager.GetAngle(t1, t2);
         }
     }

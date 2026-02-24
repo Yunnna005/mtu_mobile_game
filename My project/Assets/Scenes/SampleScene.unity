@@ -620,7 +620,7 @@ Transform:
   m_GameObject: {fileID: 1483007492}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0.5}
+  m_LocalPosition: {x: 0, y: 1, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -638,6 +638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a03f63bbe1c42b48b784df00d753cc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dragDistance: 0
 --- !u!54 &1483007498
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -768,7 +769,7 @@ Transform:
   m_GameObject: {fileID: 1623857020}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 2, z: 0.5}
+  m_LocalPosition: {x: -3, y: 0.5, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -786,6 +787,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 379bc7f8d46217c4badfe66cb902794c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &1651741702
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,7 +802,7 @@ GameObject:
   - component: {fileID: 1651741705}
   - component: {fileID: 1651741704}
   - component: {fileID: 1651741703}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1000,7 +1004,7 @@ Transform:
   m_GameObject: {fileID: 1767981694}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 2, z: 0.5}
+  m_LocalPosition: {x: 3, y: 1, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

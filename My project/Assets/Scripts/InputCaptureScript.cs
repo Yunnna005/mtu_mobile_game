@@ -1,7 +1,6 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class InputCaptureScript : MonoBehaviour
 {
@@ -14,13 +13,16 @@ public class InputCaptureScript : MonoBehaviour
     void Start()
     {
         theManager = FindObjectOfType<ManagerActionsScript>();
+        Input.gyro.enabled = true;
     }
 
     void Update()
     {
+        GyroModifyCamera();
+        Touch t, t2;
         if (Input.touchCount > 0)
         {
-            Touch t = Input.touches[0];
+            t = Input.touches[0];
             switch (t.phase)
             {
                 case TouchPhase.Began:
@@ -52,14 +54,37 @@ public class InputCaptureScript : MonoBehaviour
                     break;
             }
         }
-        
+
         if (Input.touchCount >= 2)
         {
-            Touch t1 = Input.GetTouch(0);
-            Touch t2 = Input.GetTouch(1);
+            t = Input.GetTouch(0);
+            t2 = Input.GetTouch(1);
 
-            theManager.Pinch(t1, t2);
-            theManager.GetAngle(t1, t2);
+            theManager.Pinch(t, t2);
+            theManager.isTwoTouches = true;
+
+            theManager.GetRotation(theManager.GetAngle(t, t2));
         }
+
+        if (Input.touchCount >= 3)
+        {
+            t = Input.GetTouch(0);
+            t2 = Input.GetTouch(1);
+            theManager.isTwoTouches = false;
+            theManager.isRotatingAround = true;
+            theManager.GetRotation(theManager.GetAngle(t, t2));
+        }
+    }
+
+    void GyroModifyCamera()
+    {
+        Quaternion rotation = GyroToUnity(Input.gyro.attitude);
+        print(rotation);
+        theManager.GetGyroRatation(rotation);
+    }
+
+    private static Quaternion GyroToUnity(Quaternion q)
+    {
+        return new Quaternion(q.x, q.y, -q.z, -q.w);
     }
 }

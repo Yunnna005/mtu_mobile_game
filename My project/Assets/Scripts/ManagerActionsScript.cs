@@ -8,6 +8,7 @@ public class ManagerActionsScript : MonoBehaviour
     IInteractable selectedObject;
     RaycastHit hit;
     CameraManager camera;
+    internal bool isTwoTouches, isRotatingAround = false;
 
     private void Start()
     {
@@ -49,9 +50,13 @@ public class ManagerActionsScript : MonoBehaviour
         {
             selectedObject.Drag(ray);
         }
-        else
+        else if (isTwoTouches)
         {
             camera.Move(delta);
+        }
+        else
+        {
+            return;
         }
     }
 
@@ -75,21 +80,39 @@ public class ManagerActionsScript : MonoBehaviour
         }    
     }
 
-    internal void GetAngle(Touch touch1, Touch touch2)
+    internal float GetAngle(Touch touch1, Touch touch2)
     {
-
         float y = touch1.position.y - touch2.position.y; 
         float x = touch1.position.x - touch2.position.x;
 
         float angle = Mathf.Atan2(y,x) * Mathf.Rad2Deg;
+        return angle;
+    }
 
-        if (selectedObject != null) 
+    internal void GetRotation(float angle)
+    {
+        if (selectedObject != null)
         {
             selectedObject.Rotate(angle);
         }
         else
         {
-            camera.Rotate(angle);
+            if (isTwoTouches && !isRotatingAround)
+            {
+                camera.Rotate(angle);
+            }
+            else
+            {
+                camera.RotateAround(angle);
+            }      
+        }
+    }
+
+    internal void GetGyroRatation(Quaternion quaternion)
+    {
+        if (selectedObject != null)
+        {
+            camera.CameraRotation(quaternion);
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ManagerActionsScript : MonoBehaviour
 {
-    IInteractable selectedObject;
+    public IInteractable selectedObject;
     RaycastHit hit;
     CameraManager camera;
     internal bool isTwoTouches, isRotatingAround = false;
@@ -105,14 +105,6 @@ public class ManagerActionsScript : MonoBehaviour
             {
                 camera.RotateAround(angle);
             }      
-        }
-    }
-
-    internal void GetGyroRatation(Quaternion quaternion)
-    {
-        if (selectedObject != null)
-        {
-            camera.CameraRotation(quaternion);
         }
     }
 }

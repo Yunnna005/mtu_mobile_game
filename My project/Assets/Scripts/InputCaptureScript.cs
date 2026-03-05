@@ -13,12 +13,11 @@ public class InputCaptureScript : MonoBehaviour
     void Start()
     {
         theManager = FindObjectOfType<ManagerActionsScript>();
-        Input.gyro.enabled = true;
+
     }
 
     void Update()
     {
-        GyroModifyCamera();
         Touch t, t2;
         if (Input.touchCount > 0)
         {
@@ -74,17 +73,5 @@ public class InputCaptureScript : MonoBehaviour
             theManager.isRotatingAround = true;
             theManager.GetRotation(theManager.GetAngle(t, t2));
         }
-    }
-
-    void GyroModifyCamera()
-    {
-        Quaternion rotation = GyroToUnity(Input.gyro.attitude);
-        print(rotation);
-        theManager.GetGyroRatation(rotation);
-    }
-
-    private static Quaternion GyroToUnity(Quaternion q)
-    {
-        return new Quaternion(q.x, q.y, -q.z, -q.w);
     }
 }

@@ -5,10 +5,22 @@ public class CameraManager : MonoBehaviour
 {
     public GameObject CameraRotationPoint;
     Transform rotationPoint;
+    ManagerActionsScript manager;
 
     private void Start()
     {
         rotationPoint = CameraRotationPoint.transform;
+        Input.gyro.enabled = true;
+        manager = FindAnyObjectByType<ManagerActionsScript>();
+    }
+    private void Update()
+    {
+        if (manager.selectedObject != null && manager != null)
+        {
+            float rotationSpeed = -Input.gyro.rotationRateUnbiased.z;
+
+            transform.Rotate(0, 0, rotationSpeed * 0.5f);
+        }
     }
     public void Move(Vector2 delta)
     {
@@ -30,10 +42,5 @@ public class CameraManager : MonoBehaviour
     internal void Rotate(float angle)
     {
         transform.Rotate(0, 0, angle * Time.deltaTime*0.3f);
-    }
-
-    internal void CameraRotation(Quaternion quaternion)
-    {
-        rotationPoint.transform.Rotate(0, quaternion.y * 0.5f, 0);
     }
 }

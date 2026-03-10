@@ -6,6 +6,9 @@ public class CameraManager : MonoBehaviour
     public GameObject CameraRotationPoint;
     Transform rotationPoint;
     ManagerActionsScript manager;
+    public bool isRotatingAroundItself = false;
+    public bool isGyro = false;
+    public bool isZoom = false;
 
     private void Start()
     {
@@ -15,7 +18,7 @@ public class CameraManager : MonoBehaviour
     }
     private void Update()
     {
-        if (manager.selectedObject != null && manager != null)
+        if (manager.selectedObject != null && manager != null && isGyro)
         {
             float rotationSpeed = -Input.gyro.rotationRateUnbiased.z;
 
@@ -29,18 +32,24 @@ public class CameraManager : MonoBehaviour
 
     public void Zoom(float new_scale)
     {
-        Camera.main.fieldOfView -= new_scale * 0.1f;
-        Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, 20f, 80f);
+        if (isZoom)
+        {
+            Camera.main.fieldOfView -= new_scale * 0.1f;
+            Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, 20f, 80f);
+        }
     }
 
     internal void RotateAround(float angle)
     {
-        
-        rotationPoint.transform.Rotate(0, angle * Time.deltaTime, 0 );
+        rotationPoint.transform.Rotate(0, angle * Time.deltaTime, 0);
     }
 
     internal void Rotate(float angle)
     {
-        transform.Rotate(0, 0, angle * Time.deltaTime*0.3f);
+        if (isRotatingAroundItself)
+        {
+            float smoothAngle = Mathf.Lerp(0, angle, 0.5f);
+            transform.Rotate(0, 0, smoothAngle*0.003f);
+        }
     }
 }

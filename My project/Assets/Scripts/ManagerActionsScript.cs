@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -8,7 +9,8 @@ public class ManagerActionsScript : MonoBehaviour
     public IInteractable selectedObject;
     RaycastHit hit;
     CameraManager camera;
-    internal bool isTwoTouches, isRotatingAround = false;
+    internal bool isTwoTouches, isRotatingAround = false, hasPreviousAngle = false;
+    internal float previousAngle;
 
     private void Start()
     {

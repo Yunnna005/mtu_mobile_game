@@ -7,8 +7,6 @@ using UnityEngine.UI;
 public class ButtonController : MonoBehaviour
 {
     CameraManager camera_manager;
-
-    int click = 0;
     private void Start()
     {
         camera_manager = FindAnyObjectByType<CameraManager>();
@@ -18,8 +16,26 @@ public class ButtonController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void TurnOnOffCameraMovement()
+    {
+        int click = 0;
+        if (click == 0)
+        {
+            camera_manager.isMoving = true;
+            this.GetComponentInChildren<Text>().text = "Camera Movement ON";
+            click = 1;
+        }
+        else
+        {
+            camera_manager.isMoving = false;
+            this.GetComponentInChildren<Text>().text = "Camera Movement OFF";
+            click = 0;
+        }
+    }
+
     public void TurnOnOffCameraRotationItself()
     {
+        int click = 0;
         if (click == 0)
         {
             camera_manager.isRotatingAroundItself = true;
@@ -36,6 +52,7 @@ public class ButtonController : MonoBehaviour
 
     public void TurmOnOffGyro()
     {
+        int click = 0;
         if (click == 0)
         {
             camera_manager.isGyro = true;
@@ -52,6 +69,7 @@ public class ButtonController : MonoBehaviour
 
     public void TurnOnOffCameraZoom()
     {
+        int click = 0;
         if (click == 0)
         {
             camera_manager.isZoom = true;

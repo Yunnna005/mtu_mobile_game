@@ -54,6 +54,11 @@ public class InputCaptureScript : MonoBehaviour
             }
         }
 
+        if (Input.touchCount < 2) 
+        {
+            theManager.hasPreviousAngle = false;        
+        }
+
         if (Input.touchCount >= 2)
         {
             t = Input.GetTouch(0);
@@ -62,16 +67,27 @@ public class InputCaptureScript : MonoBehaviour
             theManager.Pinch(t, t2);
             theManager.isTwoTouches = true;
 
-            theManager.GetRotation(theManager.GetAngle(t, t2));
+            float currentAngle = theManager.GetAngle(t, t2);
+            if (!theManager.hasPreviousAngle)
+            {
+                theManager.previousAngle = currentAngle;
+                theManager.hasPreviousAngle = true;
+                return;
+            }
+
+            float angle = Mathf.DeltaAngle(theManager.previousAngle, currentAngle);
+            theManager.previousAngle = currentAngle;
+            theManager.GetRotation(angle);
         }
 
         if (Input.touchCount >= 3)
         {
             t = Input.GetTouch(0);
-            t2 = Input.GetTouch(1);
             theManager.isTwoTouches = false;
             theManager.isRotatingAround = true;
-            theManager.GetRotation(theManager.GetAngle(t, t2));
+
+            float xPosition = t.deltaPosition.x;
+            theManager.GetRotation(xPosition);
         }
     }
 }

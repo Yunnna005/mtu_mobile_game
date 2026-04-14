@@ -3,9 +3,6 @@ using UnityEngine.Advertisements;
 
 public class InterstitialAdExample : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
-//[SerializeField] string _androidAdUnitId = "6086609";
-   // [SerializeField] string _iOSAdUnitId = "6086608";
-
     [SerializeField] string _androidAdUnitId = "Interstitial_Android";
     [SerializeField] string _iOSAdUnitId = "Interstitial_iOS";
     string _adUnitId;

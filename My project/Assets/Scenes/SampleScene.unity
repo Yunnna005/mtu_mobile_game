@@ -498,7 +498,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &254647144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1055,7 +1055,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &475020470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2182,10 +2182,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _androidGameId: 6086609
-  _iOSGameId: 6086608
-  _testMode: 0
+  _testMode: 1
   _androidBannerId: Banner_Android
-  _iOSBannerId: Banner_iOS
+  _androidInterstitialId: Interstitial_Android
+  _androidRewardedId: Rewarded_Android
 --- !u!1 &2108567353
 GameObject:
   m_ObjectHideFlags: 0

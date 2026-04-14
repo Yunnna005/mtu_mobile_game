@@ -11,7 +11,20 @@ public class ButtonController : MonoBehaviour
     }
     public void OnClick()
     {
+        ShowRewarded();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    void ShowRewarded()
+    {
+        if (AdsInitializer.Instance != null)
+        {
+            AdsInitializer.Instance.ShowRewarded();
+        }
+        else
+        {
+            Debug.Log("Ads not initialized yet.");
+        }
     }
 
     public void TurnOnOffCameraMovement()
@@ -67,6 +80,7 @@ public class ButtonController : MonoBehaviour
 
     public void TurnOnOffCameraZoom()
     {
+        ShowRewarded();
         int click = 0;
         if (click == 0)
         {

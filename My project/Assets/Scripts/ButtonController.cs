@@ -11,15 +11,27 @@ public class ButtonController : MonoBehaviour
     }
     public void OnClick()
     {
-        ShowRewarded();
+        ShowUnityRewarded();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    void ShowRewarded()
+    void ShowUnityRewarded()
     {
-        if (AdsInitializer.Instance != null)
+        if (AdsUnityManager.Instance != null)
         {
-            AdsInitializer.Instance.ShowRewarded();
+            AdsUnityManager.Instance.ShowRewarded();
+        }
+        else
+        {
+            Debug.Log("Ads not initialized yet.");
+        }
+    }
+
+    void ShowAdMobAds()
+    {
+        if (AdMobManager.Instance != null)
+        {
+            AdMobManager.Instance.ShowRewardedAd();
         }
         else
         {
@@ -63,6 +75,7 @@ public class ButtonController : MonoBehaviour
 
     public void TurmOnOffGyro()
     {
+        ShowAdMobAds();
         int click = 0;
         if (click == 0)
         {
@@ -80,7 +93,7 @@ public class ButtonController : MonoBehaviour
 
     public void TurnOnOffCameraZoom()
     {
-        ShowRewarded();
+        ShowUnityRewarded();
         int click = 0;
         if (click == 0)
         {

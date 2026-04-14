@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.InputSystem;
 
-public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
+public class AdsUnityManager : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
 {
     [Header("Game IDs")]
     [SerializeField] private string _androidGameId = "6086609";
@@ -23,7 +23,7 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener, IU
     public static event Action OnRewardEarned;  
 
 
-    public static AdsInitializer Instance;
+    public static AdsUnityManager Instance;
 
     void Awake()
     {

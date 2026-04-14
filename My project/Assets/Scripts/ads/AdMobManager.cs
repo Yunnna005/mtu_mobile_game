@@ -6,11 +6,8 @@ using UnityEngine;
 public class AdMobManager : MonoBehaviour
 {
     private BannerView bannerView;
-    private AppOpenAd appOpenAd;
     private RewardedAd rewardedAd;
     private InterstitialAd interstitialAd;
-    private DateTime loadTime;
-    private bool isShowingAd = false;
 
     private string bannerId = "ca-app-pub-8618196431920161/1688585489";
     private string interstitialId = "ca-app-pub-8618196431920161/5804639443";
@@ -42,12 +39,10 @@ public class AdMobManager : MonoBehaviour
             }
 
             Debug.Log("Google Mobile Ads initialization complete.");
-            LoadAppOpenAd();
             LoadInterstitial();
             LoadBanner();
             LoadRewardedAd();
         });
-        AppStateEventNotifier.AppStateChanged += OnAppStateChanged;
     }
 
     #region Banner

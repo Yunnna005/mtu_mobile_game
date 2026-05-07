@@ -73,4 +73,4 @@ If any button or gesture stops responding, tap the **Reset** button to reload th
 | 2-finger drag | Pan camera | Camera Movement ON |
 | 2-finger twist | Rotate camera | Camera Rotation ON |
 | 2-finger pinch | Zoom camera | Camera Zoom ON |
-| Tilt phone L/R | Gyroscope camera rotate | Gyro ON |
+| Tilt phone L/R | Gyroscope camera rotate | Gyro ON, any object selected |

@@ -42,6 +42,6 @@ public class CapsuleManager : MonoBehaviour, IInteractable
 
     public void Rotate(float angle)
     {
-        transform.Rotate(0, 0, angle * Time.deltaTime);
+        transform.Rotate(0, 0, angle);
     }
 }
